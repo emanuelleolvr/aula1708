@@ -1,5 +1,4 @@
 "use client";
-"use client";
 
 import { useState } from "react";
 import Header from "../components/header";
@@ -30,6 +29,19 @@ export default function Calculadora() {
           setResult(num1 / num2);
         }
         break;
+      case "raiz":
+        // A raiz quadrada é calculada com base no primeiro número inserido
+        if (num1 < 0) {
+          setResult("Erro: Negativo");
+        } else {
+          setResult(Math.sqrt(num1));
+        }
+        break;
+      case "limpar":
+        setN1("");
+        setN2("");
+        setResult(null);
+        break;
       default:
         setResult(null);
     }
@@ -41,7 +53,7 @@ export default function Calculadora() {
 
       <main className="calc-container">
         <div className="calc-card">
-          {/* Cabeçalho Interno da Calculadora */}
+          {/* Cabeçalho Interno */}
           <div className="calc-header-inner">
             <div className="calc-dots">
               <span className="dot dot-1"></span>
@@ -62,7 +74,7 @@ export default function Calculadora() {
           {/* Formulário / Inputs */}
           <div className="calc-form">
             <div className="input-group">
-              <label htmlFor="n1">Primeiro Número</label>
+              <label htmlFor="n1">Primeiro Número (ou Base da Raiz)</label>
               <div className="input-field-wrapper">
                 <input
                   id="n1"
@@ -87,8 +99,8 @@ export default function Calculadora() {
               </div>
             </div>
 
-            {/* Grade de Botões de Operação */}
-            <div className="calc-actions-grid">
+            {/* Nova Grade de Botões (3 colunas x 2 linhas) */}
+            <div className="calc-actions-grid-v2">
               <button className="calc-btn-op op-somar" onClick={() => calcular("somar")} title="Somar">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
                   <path d="M12 5v14M5 12h14" />
@@ -108,15 +120,24 @@ export default function Calculadora() {
               </button>
 
               <button className="calc-btn-op op-dividir" onClick={() => calcular("dividir")} title="Dividir">
-  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-    {/* Linha central da divisão */}
-    <path d="M5 12h14" strokeLinecap="round" />
-    {/* Ponto superior */}
-    <circle cx="12" cy="6" r="1.5" fill="currentColor" stroke="none" />
-    {/* Ponto inferior */}
-    <circle cx="12" cy="18" r="1.5" fill="currentColor" stroke="none" />
-  </svg>
-</button>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                  <path d="M5 12h14" strokeLinecap="round" />
+                  <circle cx="12" cy="6" r="1.5" fill="currentColor" stroke="none" />
+                  <circle cx="12" cy="18" r="1.5" fill="currentColor" stroke="none" />
+                </svg>
+              </button>
+
+              {/* Botão de Raiz Quadrada */}
+              <button className="calc-btn-op op-raiz" onClick={() => calcular("raiz")} title="Raiz Quadrada">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M3 12h3l3 8 5-16h7" />
+                </svg>
+              </button>
+
+              {/* Botão de Limpar (C) */}
+              <button className="calc-btn-op op-limpar" onClick={() => calcular("limpar")} title="Limpar Tudo">
+                <span className="clear-text">C</span>
+              </button>
             </div>
           </div>
         </div>

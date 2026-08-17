@@ -389,4 +389,67 @@ header h1,
   border-color: #f472b6;
   box-shadow: 0 6px 20px rgba(244, 114, 182, 0.4);
 }
+/* ==========================================================================
+   NOVA GRADE DE BOTÕES (3 COLUNAS - SIMETRIA PERFEITA)
+   ========================================================================== */
+
+.calc-actions-grid-v2 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* Altera para 3 blocos por linha */
+  gap: 0.85rem;
+  margin-top: 1rem;
+}
+
+/* Texto interno do botão Limpar */
+.clear-text {
+  font-size: 1.35rem;
+  font-weight: 800;
+  font-family: system-ui, sans-serif;
+}
+
+/* --- Efeitos individuais de Hover atualizados --- */
+.op-somar:hover {
+  background: linear-gradient(135deg, #ff2a85 0%, #d91b6c 100%);
+  border-color: #ff2a85;
+  box-shadow: 0 6px 20px rgba(255, 42, 133, 0.4);
+}
+
+.op-subtrair:hover {
+  background: linear-gradient(135deg, #f43f5e 0%, #be185d 100%);
+  border-color: #f43f5e;
+  box-shadow: 0 6px 20px rgba(244, 63, 94, 0.4);
+}
+
+.op-multiplicar:hover {
+  background: linear-gradient(135deg, #ec4899 0%, #9f1239 100%);
+  border-color: #ec4899;
+  box-shadow: 0 6px 20px rgba(236, 72, 153, 0.4);
+}
+
+.op-dividir:hover {
+  background: linear-gradient(135deg, #f472b6 0%, #db2777 100%);
+  border-color: #f472b6;
+  box-shadow: 0 6px 20px rgba(244, 114, 182, 0.4);
+}
+
+/* Estilo Neon para o botão de Raiz Quadrada */
+.op-raiz:hover {
+  background: linear-gradient(135deg, #fb7185 0%, #e11d48 100%);
+  border-color: #fb7185;
+  box-shadow: 0 6px 20px rgba(251, 113, 133, 0.4);
+}
+
+/* Estilo diferenciado para o botão de Limpar (Tom mais escuro/sóbrio com brilho discreto) */
+.op-limpar {
+  background: rgba(255, 255, 255, 0.03);
+  border-color: rgba(255, 255, 255, 0.1);
+  color: #94a3b8;
+}
+
+.op-limpar:hover {
+  background: linear-gradient(135deg, #475569 0%, #1e293b 100%);
+  border-color: #94a3b8;
+  color: #ffffff;
+  box-shadow: 0 6px 20px rgba(148, 163, 184, 0.25);
+}
 
