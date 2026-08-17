@@ -1,49 +1,392 @@
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
-html {
-  height: 100%;
-}
-
-html,
+/* ==========================================================================
+   RESET GLOBAL - REMOVE BORDAS E MARGENS PADRÕES
+   ========================================================================== */
+html, 
 body {
-  max-width: 100vw;
-  overflow-x: hidden;
+  margin: 0;
+  padding: 0;
+  border: none;
+  outline: none;
+  background-color: #0a0508; /* Força o fundo escuro na página inteira */
+  overflow-x: hidden;       /* Evita barras de rolagem horizontais fantasmas */
 }
 
-body {
-  min-height: 100%;
+/* Garante que nenhum elemento herde bordas indesejadas do navegador */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+
+
+/* ==========================================================================
+   ESTILIZAÇÃO PREMIUM GLASS-ROSE (IMPECÁVEL)
+   ========================================================================== */
+
+.pink-theme {
+  --bg-page: #0a0508;          /* Fundo ultra escuro levemente arroxeado/rosado */
+  --bg-card: rgba(26, 12, 20, 0.65); /* Vidro escuro tom de rosa/vinho */
+  --bg-input: #12080e;         /* Inputs profundos */
+  --rose-neon: #ff2a85;        /* Rosa choque/neon vibrante */
+  --rose-glow: rgba(255, 42, 133, 0.4);
+  --rose-soft: #f472b6;        /* Rosa suave para textos secundários */
+  --text-primary: #fff5f8;     /* Branco com tom sutil de rosa */
+  --text-muted: #fda4af;       /* Rosa pastel para labels */
+  --border-glass: rgba(255, 42, 133, 0.15);
+  --border-focus: rgba(255, 42, 133, 0.6);
+}
+
+/* Wrapper principal da página */
+.page-wrapper.pink-theme {
+  min-height: 100vh;
+  background-color: var(--bg-page);
+  color: var(--text-primary);
+  font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   display: flex;
   flex-direction: column;
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  background-image: 
+    radial-gradient(circle at 10% 20%, rgba(255, 42, 133, 0.05) 0%, transparent 40%),
+    radial-gradient(circle at 90% 80%, rgba(244, 114, 182, 0.04) 0%, transparent 45%);
 }
 
-* {
+/* Centralizador centralizado */
+.calc-container {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 3rem 1.5rem;
+}
+
+/* Card da Calculadora Estilo Vidro Fosco Premium */
+.calc-card {
+  width: 100%;
+  max-width: 420px;
+  background: var(--bg-card);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--border-glass);
+  border-radius: 28px;
+  padding: 2.25rem;
+  box-shadow: 
+    0 4px 30px rgba(0, 0, 0, 0.4),
+    0 10px 50px -10px rgba(255, 42, 133, 0.1);
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.calc-card:hover {
+  border-color: rgba(255, 42, 133, 0.3);
+  box-shadow: 
+    0 4px 30px rgba(0, 0, 0, 0.5),
+    0 15px 60px -5px rgba(255, 42, 133, 0.18);
+  transform: translateY(-2px);
+}
+
+/* Cabeçalho decorativo interno */
+.calc-header-inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.75rem;
+  border-bottom: 1px solid rgba(255, 42, 133, 0.08);
+  padding-bottom: 0.75rem;
+}
+
+.calc-dots {
+  display: flex;
+  gap: 6px;
+}
+
+.dot {
+  width: 8px;
+  height: 8px;
+  border-radius: full;
+  display: inline-block;
+}
+.dot-1 { background-color: var(--rose-neon); opacity: 0.6; }
+.dot-2 { background-color: var(--rose-soft); opacity: 0.4; }
+.dot-3 { background-color: rgba(255,255,255,0.1); }
+
+.calc-title {
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--rose-soft);
+}
+
+/* Visor Digital Impecável */
+.calc-display {
+  background: linear-gradient(135deg, #180a13 0%, #0d0409 100%);
+  border: 1px solid rgba(255, 42, 133, 0.1);
+  border-radius: 20px;
+  padding: 1.5rem;
+  text-align: right;
+  margin-bottom: 2rem;
+  box-shadow: inset 0 2px 8px rgba(0,0,0,0.8);
+}
+
+.display-label {
+  display: block;
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--text-muted);
+  margin-bottom: 0.5rem;
+  opacity: 0.8;
+}
+
+.display-value {
+  display: block;
+  font-size: 3rem;
+  font-weight: 800;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  color: #ffffff;
+  text-shadow: 
+    0 0 10px var(--rose-glow),
+    0 0 20px rgba(255, 42, 133, 0.1);
+  letter-spacing: -0.03em;
+  word-break: break-all;
+}
+
+/* Formulário de Organização */
+.calc-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.input-group label {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  letter-spacing: 0.02em;
+}
+
+.input-field-wrapper {
+  position: relative;
+}
+
+.input-group input {
+  width: 100%;
+  background-color: var(--bg-input);
+  border: 1px solid rgba(255, 42, 133, 0.12);
+  border-radius: 14px;
+  padding: 1rem 1.25rem;
+  font-size: 1.25rem;
+  font-family: ui-monospace, monospace;
+  color: #ffffff;
   box-sizing: border-box;
-  padding: 0;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.input-group input::placeholder {
+  color: #4c2237;
+}
+
+/* Interação com os inputs */
+.input-group input:focus {
+  outline: none;
+  border-color: var(--rose-neon);
+  background-color: #1a0b14;
+  box-shadow: 0 0 0 4px rgba(255, 42, 133, 0.15);
+}
+
+/* Remove setas padrões numéricas */
+.input-group input::-webkit-outer-spin-button,
+.input-group input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
   margin: 0;
 }
-
-a {
-  color: inherit;
-  text-decoration: none;
+.input-group input[type=number] {
+  -moz-appearance: textfield;
 }
 
-@media (prefers-color-scheme: dark) {
-  html {
-    color-scheme: dark;
+/* Botão Chic e Poderoso */
+.calc-button {
+  width: 100%;
+  background: linear-gradient(135deg, var(--rose-neon) 0%, #d91b6c 100%);
+  border: none;
+  border-radius: 16px;
+  color: #ffffff;
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  padding: 1.15rem;
+  margin-top: 0.75rem;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  box-shadow: 0 8px 24px rgba(255, 42, 133, 0.3);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.calc-button:hover {
+  box-shadow: 0 12px 30px rgba(255, 42, 133, 0.45);
+  transform: translateY(-1px);
+  filter: brightness(1.05);
+}
+
+.calc-button:active {
+  transform: translateY(1px);
+  box-shadow: 0 4px 15px rgba(255, 42, 133, 0.25);
+}
+
+.btn-icon {
+  width: 18px;
+  height: 18px;
+  transition: transform 0.2s ease;
+}
+
+.calc-button:hover .btn-icon {
+  transform: rotate(90deg);
+}
+
+
+/* ==========================================================================
+   ESTILIZAÇÃO DO HEADER / TÍTULO DA PÁGINA
+   ========================================================================== */
+
+/* Centraliza o Header e define o topo da página */
+header {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2.5rem 1rem 0 1rem; /* Espaçamento superior elegante */
+  background: transparent;
+}
+
+/* Transforma o texto "Calculadora" em um elemento ultra chamativo */
+header h1, 
+.calc-page-title {
+  font-size: 2.5rem; /* Tamanho grande e imponente */
+  font-weight: 900;  /* Letra bem grossa e moderna */
+  text-transform: uppercase;
+  letter-spacing: -0.03em;
+  text-align: center;
+  margin: 0;
+  
+  /* Efeito de Gradiente Rosa Premium no Texto */
+  background: linear-gradient(135deg, #ffffff 30%, var(--rose-neon) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  
+  /* Sombra de luz neon por trás do texto */
+  filter: drop-shadow(0 2px 10px rgba(255, 42, 133, 0.2));
+  animation: pulseGlow 4s ease-in-out infinite alternate;
+}
+
+/* Animação sutil para o título brilhar suavemente */
+@keyframes pulseGlow {
+  0% {
+    filter: drop-shadow(0 2px 8px rgba(255, 42, 133, 0.15));
+  }
+  100% {
+    filter: drop-shadow(0 2px 18px rgba(255, 42, 133, 0.4));
   }
 }
+
+/* Ajuste no container do app para juntar o título e a calculadora no centro */
+.page-wrapper.pink-theme {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.calc-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1.5rem 1.5rem 4rem 1.5rem; /* Ajustado para aproximar do título */
+}
+
+
+/* ==========================================================================
+   GRADE DE BOTÕES DE OPERAÇÃO MATEMÁTICA
+   ========================================================================== */
+
+/* Cria o grid de 4 colunas perfeitamente alinhado */
+.calc-actions-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.85rem;
+  margin-top: 1rem;
+}
+
+/* Base de todos os botões de operação */
+.calc-btn-op {
+  aspect-ratio: 1 / 1; /* Garante que os botões sejam perfeitamente quadrados */
+  background: rgba(255, 42, 133, 0.05);
+  border: 1px solid rgba(255, 42, 133, 0.15);
+  border-radius: 16px;
+  color: var(--text-muted);
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Ícones dentro dos botões */
+.calc-btn-op svg {
+  width: 22px;
+  height: 22px;
+  transition: transform 0.2s ease, stroke 0.2s ease;
+}
+
+/* Efeito Hover Geral */
+.calc-btn-op:hover {
+  transform: translateY(-2px);
+  color: #ffffff;
+}
+
+.calc-btn-op:hover svg {
+  transform: scale(1.1);
+}
+
+.calc-btn-op:active {
+  transform: translateY(1px);
+}
+
+/* Estilização Individual com Gradientes Neon Exclusivos */
+.op-somar:hover {
+  background: linear-gradient(135deg, #ff2a85 0%, #d91b6c 100%);
+  border-color: #ff2a85;
+  box-shadow: 0 6px 20px rgba(255, 42, 133, 0.4);
+}
+
+.op-subtrair:hover {
+  background: linear-gradient(135deg, #ec4899 0%, #be185d 100%);
+  border-color: #ec4899;
+  box-shadow: 0 6px 20px rgba(236, 72, 153, 0.4);
+}
+
+.op-multiplicar:hover {
+  background: linear-gradient(135deg, #f43f5e 0%, #9f1239 100%);
+  border-color: #f43f5e;
+  box-shadow: 0 6px 20px rgba(244, 63, 94, 0.4);
+}
+
+.op-dividir:hover {
+  background: linear-gradient(135deg, #f472b6 0%, #db2777 100%);
+  border-color: #f472b6;
+  box-shadow: 0 6px 20px rgba(244, 114, 182, 0.4);
+}
+
